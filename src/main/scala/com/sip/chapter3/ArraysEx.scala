@@ -10,6 +10,8 @@ object ArraysEx {
   def main (args: Array[String]) {
     createArray(10)
     swapAdjacent()
+    testList()
+    swapAdjecentYield()
   }
 
   // Write a code snippet that sets a to an array of n random integers between 0 (inclusive) and n (exclusive).
@@ -25,12 +27,42 @@ object ArraysEx {
   def swapAdjacent() = {
     val a = Array(1,2,3,4,5)
     println("Inpur Array:"+a.mkString(","))
+    //approach 1
     for(i <- 0 until a.length if(i % 2 == 1)) {
       val temp = a(i)
       a(i) = a(i-1)
       a(i-1) = temp
     }
     println("Output Array:"+a.mkString(", "))
+    //approach 2, but this gives the new array
+    val x = a.grouped(2).flatMap(_.reverse).toArray
+    println("Corrected array:" + a.mkString(",")+"<==>"+x.mkString(","))
   }
 
+  //Repeat the preceding assignment, but produce a new array with the swapped values. Use for/yield
+  def swapAdjecentYield() = {
+    val a = Array(1,2,3,4,5)
+    println("Inpur Array:"+a.mkString(","))
+    val k = for(i <- 0 until a.length) yield {
+      if(i % 2 == 0)
+        if(i == a.length -1)
+          a(i)
+        else
+          a(i+1)
+      else
+        a(i-1)
+    }
+    println("Outpu Array:"+k.mkString(","))
+  }
+
+  def f(x:Int) = if(x>2) Some(x) else None
+
+  def testList(): Unit = {
+    val l = List(1,2,3,4)
+    val map: List[Option[Int]] = l.map(x => f(x))
+
+    println(map.mkString(","))
+    val map1: List[Int] = l.flatMap(x => f(x))
+    println(map1.mkString(","))
+  }
 }
