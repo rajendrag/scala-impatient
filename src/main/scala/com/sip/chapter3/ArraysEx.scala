@@ -12,6 +12,7 @@ object ArraysEx {
     swapAdjacent()
     testList()
     swapAdjecentYield()
+    classifyArray()
   }
 
   // Write a code snippet that sets a to an array of n random integers between 0 (inclusive) and n (exclusive).
@@ -53,6 +54,27 @@ object ArraysEx {
         a(i-1)
     }
     println("Outpu Array:"+k.mkString(","))
+  }
+
+  /**4. Given an array of integers, produce a new array that contains all positive
+  values of the original array, in their original order, followed by all values that
+  are zero or negative, in their original order.
+  */
+  def classifyArray(): Unit = {
+    val a = Array(4,8,-3,5,-2,0,6, 8, 9, -1,-2,3,4)
+    var negCount = a.count(_ <= 0)
+    var negTracker = 0;
+    val res = new Array[Int](a.length)
+    for(i <- a.length-1 to 0 by -1) {
+      if(a(i) > 0) {
+        res(i - negCount) = a(i)
+      } else {
+        res(a.length - negTracker - 1) = a(i)
+        negCount -= 1
+        negTracker += 1
+      }
+    }
+    println("Input:"+a.mkString(",")+" Output:"+ res.mkString(","))
   }
 
   def f(x:Int) = if(x>2) Some(x) else None
