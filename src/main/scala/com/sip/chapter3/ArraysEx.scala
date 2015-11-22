@@ -13,6 +13,7 @@ object ArraysEx {
     testList()
     swapAdjecentYield()
     classifyArray()
+    computeAvg()
   }
 
   // Write a code snippet that sets a to an array of n random integers between 0 (inclusive) and n (exclusive).
@@ -75,6 +76,14 @@ object ArraysEx {
       }
     }
     println("Input:"+a.mkString(",")+" Output:"+ res.mkString(","))
+  }
+
+  /**
+    * 5. How do you compute the average of an Array[Double] ?
+    */
+  def computeAvg(): Unit = {
+    val a = Array(5.7, 4, 5, 7.8, 9)
+    println("Avg of :"+a.mkString(",")+" =>" + (a.sum/a.length))
   }
 
   def f(x:Int) = if(x>2) Some(x) else None
