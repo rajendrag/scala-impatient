@@ -1,6 +1,7 @@
 package com.sip.chapter3
 
-import scala.util.Random
+import scala.collection.mutable.ArrayBuffer
+import scala.util.{Sorting, Random}
 
 /**
   * Created by rp on 19/11/15.
@@ -9,11 +10,12 @@ object ArraysEx {
 
   def main (args: Array[String]) {
     createArray(10)
-    swapAdjacent()
-    testList()
-    swapAdjecentYield()
-    classifyArray()
-    computeAvg()
+    swapAdjacent
+    testList
+    swapAdjecentYield
+    classifyArray
+    computeAvg
+    reverseSort
   }
 
   // Write a code snippet that sets a to an array of n random integers between 0 (inclusive) and n (exclusive).
@@ -77,13 +79,27 @@ object ArraysEx {
     }
     println("Input:"+a.mkString(",")+" Output:"+ res.mkString(","))
   }
-
   /**
     * 5. How do you compute the average of an Array[Double] ?
     */
   def computeAvg(): Unit = {
     val a = Array(5.7, 4, 5, 7.8, 9)
     println("Avg of :"+a.mkString(",")+" =>" + (a.sum/a.length))
+  }
+
+  /**
+    * 6. How do you rearrange the elements of an Array[Int] so that they appear in
+    * reverse sorted order? How do you do the same with an ArrayBuffer[Int] ?
+    */
+  def reverseSort(): Unit = {
+    val a = Array(4,8,-3,5,-2,0,6, 8, 9, -1,-2,3,4)
+    val b = a.sortWith(_ >= _)
+    println("Sorted In reverse : "+ b.mkString(","))
+
+    val y = new ArrayBuffer[Int]()
+    y ++= List(4,8,-3,5,-2,0,6, 8, 9, -1,-2,3,4)
+    val z = a.sortWith(_ >= _)
+    println("Sorted In reverse : "+ z.mkString(","))
   }
 
   def f(x:Int) = if(x>2) Some(x) else None
