@@ -1,5 +1,8 @@
 package com.sip.chapter3
 
+import java.awt.datatransfer.{DataFlavor, SystemFlavorMap}
+import java.util.TimeZone
+
 import scala.collection.mutable.ArrayBuffer
 import scala.util.{Sorting, Random}
 
@@ -16,6 +19,8 @@ object ArraysEx {
     classifyArray
     computeAvg
     reverseSort
+    sortTimeZones
+    convertJavaListToScalaBuffer
   }
 
   // Write a code snippet that sets a to an array of n random integers between 0 (inclusive) and n (exclusive).
@@ -100,6 +105,24 @@ object ArraysEx {
     y ++= List(4,8,-3,5,-2,0,6, 8, 9, -1,-2,3,4)
     val z = a.sortWith(_ >= _)
     println("Sorted In reverse : "+ z.mkString(","))
+  }
+
+  /**
+    *  Make a collection of all time zones returned by java.util.TimeZone.getAvailableIDs
+    *  that are in America. Strip off the "America/" prefix and sort the result.
+    */
+  def sortTimeZones() = {
+    val timeZones: Array[String] = TimeZone.getAvailableIDs
+    val sorted = timeZones.filter(_ startsWith("America/")).sorted
+    println("Sorted timezones :"+sorted.mkString(","))
+  }
+
+
+  def convertJavaListToScalaBuffer() = {
+    val flavors = SystemFlavorMap.getDefaultFlavorMap().asInstanceOf[SystemFlavorMap]
+    import scala.collection.JavaConversions._
+    val arrayBuffer = flavors.getNativesForFlavor(DataFlavor.imageFlavor)
+    println(arrayBuffer)
   }
 
   def f(x:Int) = if(x>2) Some(x) else None
