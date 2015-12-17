@@ -42,9 +42,16 @@ object MapEx {
     println(dictionary.mkString(","))
   }
 
+  /**
+    * One liner for word count
+    * Source.fromFile("myfile.txt").getLines().flatMap(_.split(" ")) gives the Iterator of words
+    * .toList converting from iterator to list
+    * .groupBy((x) => x) gives the Map[String, List[String]]
+    * .mapValues(_.length) map the values (List[String]) to its length
+    *
+    */
   def countWordsDeclerative() = {
-    val words = Source.fromFile("myfile.txt").getLines().flatMap(_.split(" "))
-    println(words.mkString(", "))
-    //words.gr
+    val words = Source.fromFile("myfile.txt").getLines().flatMap(_.split(" ")).toList.groupBy((x) => x).mapValues(_.length)
+    println(words.mkString(", "));
   }
 }
