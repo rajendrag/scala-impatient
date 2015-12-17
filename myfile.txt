@@ -1,0 +1,5 @@
+Hello scala
+scala hello Hello in capital
+I love scala.. No it should be Scala
+I love Scala
+Yes, that is correct
